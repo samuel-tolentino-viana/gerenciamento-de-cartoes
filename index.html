@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Pessoas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        <!-- 1. CABEÇALHO -->
+        <header class="page-header">
+            <h1>Gerenciador de Pessoas</h1>
+            <p class="subtitle">Adicione pessoas e veja sua classificação por idade.</p>
+        </header>
+
+        <main>
+
+            <!-- 2. ÁREA DE CADASTRO + 3. ÁREA DE MENSAGEM -->
+            <section class="form-card" aria-label="Cadastrar pessoa">
+                <form id="person-form" class="person-form">
+                    <div class="field">
+                        <label for="name-input">Nome</label>
+                        <input type="text" id="name-input" name="name" placeholder="Digite o nome">
+                    </div>
+                    <div class="field">
+                        <label for="age-input">Idade</label>
+                        <input type="number" id="age-input" name="age" placeholder="Digite a idade" min="0">
+                    </div>
+                    <button type="button" class="btn-primary" id="add-person-btn">Adicionar pessoa</button>
+                </form>
+
+                <!-- controlada futuramente pelo JavaScript (exibir/ocultar) -->
+                <p class="form-message" id="form-message">Preencha todos os campos!</p>
+            </section>
+
+            <!-- 4. ÁREA DE PESSOAS -->
+            <section class="people-section" aria-label="Pessoas cadastradas">
+                <h2>Pessoas cadastradas</h2>
+
+                <div class="people-grid" id="people-grid">
+
+                    <article class="person-card">
+                        <div class="person-card-header">
+                            <h3>Ana</h3>
+                            <span class="badge badge-child">Criança</span>
+                        </div>
+                        <p class="person-age">10 anos</p>
+                        <button class="btn-secondary">Remover</button>
+                    </article>
+
+                    <article class="person-card">
+                        <div class="person-card-header">
+                            <h3>Lucas</h3>
+                            <span class="badge badge-teen">Adolescente</span>
+                        </div>
+                        <p class="person-age">16 anos</p>
+                        <button class="btn-secondary">Remover</button>
+                    </article>
+
+                    <article class="person-card">
+                        <div class="person-card-header">
+                            <h3>Maria</h3>
+                            <span class="badge badge-adult">Adulto</span>
+                        </div>
+                        <p class="person-age">25 anos</p>
+                        <button class="btn-secondary">Remover</button>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- 5. ESTADO VAZIO (referência visual, exibida futuramente pelo JavaScript
+           quando a lista de pessoas estiver vazia) -->
+            <div class="reference-divider">Referência — estado vazio</div>
+
+            <section class="empty-state" aria-label="Nenhuma pessoa cadastrada">
+                <p class="empty-title">Nenhuma pessoa cadastrada.</p>
+                <p class="empty-subtitle">Adicione uma pessoa usando o formulário acima.</p>
+                <div class="people-grid" id="people-grid">
+
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
