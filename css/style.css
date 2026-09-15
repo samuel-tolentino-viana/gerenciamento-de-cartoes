@@ -52,6 +52,8 @@ input {
     --color-teen-text: #1E4E8C;
     --color-adult-bg: #DCF1EC;
     --color-adult-text: #0F5449;
+    --color-senior-bg: #EAE6F8;
+    --color-senior-text: #4A3B6B;
 
     /* remoção */
     --color-danger-text: #A02B2B;
@@ -287,6 +289,11 @@ input:focus-visible {
     color: var(--color-adult-text);
 }
 
+.badge-elderly {
+background: var(--color-senior-bg);
+color: var(--color-senior-text);
+}
+
 .btn-secondary {
     align-self: flex-start;
     height: 38px;
@@ -383,4 +390,8 @@ input:focus-visible {
         height: 46px;
         justify-content: center;
     }
+}
+
+.desativar {
+    display: none;
 }

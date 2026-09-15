@@ -1,5 +1,8 @@
 const botaoAdicionarPessoa = document.querySelector('#add-person-btn');
 const statusDeAdicoes = document.querySelector('.empty-state');
+const nenhumCadastroAviso = document.querySelector('.empty-title');
+const nenhCadastroAvisoSub = document.querySelector('.empty-subtitle');
+const pessoasCadastradas = document.querySelector('.empty-state');
 
 function verificacao() {
    const nomeDaPessoa = document.querySelector('#name-input').value;
@@ -7,7 +10,18 @@ function verificacao() {
    const idadeDaPessoa = Number(i);
 
    if(nomeDaPessoa.length != 0 && i.length != 0) {
-      criarCard(nomeDaPessoa, idadeDaPessoa);
+
+      nenhumCadastroAviso.classList.add('desativar');
+      nenhCadastroAvisoSub.classList.add('desativar');
+      let textCadastrados = document.createElement('h4');
+      textCadastrados.innerText = 'Cadastrados';
+      pessoasCadastradas.appendChild(textCadastrados);
+
+      if(idadeDaPessoa < 0 && idadeDaPessoa > 126) {
+         alert('[ERRO] Digite uma idade válida!');
+      } else {
+         criarCard(nomeDaPessoa, idadeDaPessoa);
+      }
    } else {
       alert('[ERRO] Digite algo nos campos acima!');
    }
@@ -35,7 +49,7 @@ function criarCard(nome, idade) {
    let span = document.createElement('span');
    span.setAttribute('class', 'badge');
    infoPessoa.appendChild(span);
-   span.innerText = '0214';
+   calcularIdade(idade, span);
    
    let idadeDaPessoa = document.createElement('p');
    idadeDaPessoa.setAttribute('class', 'person-age');
@@ -46,22 +60,22 @@ function criarCard(nome, idade) {
    remover.setAttribute('class', 'btn-secondary');
    remover.innerText = 'Remover';
    article.appendChild(remover);
-
-   // <article class="person-card">
-   //    <div class="person-card-header">
-   //          <h3>Maria</h3>
-   //          <span class="badge badge-adult">Adulto</span>
-   //    </div>
-   //    <p class="person-age">25 anos</p>
-   //    <button class="btn-secondary">Remover</button>
-   // </article>
-
 }
 
-function calcularIdade(idade) {
-   if(idade < 12) {
-      
-   }
+function calcularIdade(idade, tipoDeTexto) {
+   if(idade > 0 && idade < 12) {
+      tipoDeTexto.classList.add('badge-child');
+      tipoDeTexto.innerText = 'Criança';
+   } else if(idade >= 12 && idade < 18) {
+      tipoDeTexto.classList.add('badge-teen');
+      tipoDeTexto.innerText = 'Adolecente';
+   } else if(idade >= 18 && idade < 60) {
+      tipoDeTexto.classList.add('badge-adult');
+      tipoDeTexto.innerText = 'Adulto';
+   } else {
+      tipoDeTexto.classList.add('badge-elderly');
+      tipoDeTexto.innerText = 'Idoso';  
+   };
 };
 
 botaoAdicionarPessoa.addEventListener('click', () => {
