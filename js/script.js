@@ -3,6 +3,8 @@ const statusDeAdicoes = document.querySelector('.empty-state');
 const nenhumCadastroAviso = document.querySelector('.empty-title');
 const nenhCadastroAvisoSub = document.querySelector('.empty-subtitle');
 const pessoasCadastradas = document.querySelector('.empty-state');
+const nomeDaPessoa = document.querySelector('#name-input');
+const i = document.querySelector('#age-input');
 
 function verificacao() {
    const nomeDaPessoa = document.querySelector('#name-input').value;
@@ -78,8 +80,27 @@ function calcularIdade(idade, tipoDeTexto) {
    };
 };
 
+function verificandoOsCampos(campoNome, campoIdade) {
+   const avisoDosCampos = document.querySelector('.form-message');
+   if(campoNome.value.length != 0 && campoIdade.value.length != 0) {
+      avisoDosCampos.classList.add('desativar');
+   }
+};
+
 botaoAdicionarPessoa.addEventListener('click', () => {
    verificacao();
+   const nomeDaPessoa = document.querySelector('#name-input');
+   const i = document.querySelector('#age-input');
+
+   nomeDaPessoa.value = '';
+   nomeDaPessoa.focus();
+   i.value = '';
+});
+
+nomeDaPessoa.addEventListener('input', () => {
+   const nomeDaPessoa = document.querySelector('#name-input');
+   const i = document.querySelector('#age-input');
+   verificandoOsCampos(nomeDaPessoa, i);
 });
 
 /*

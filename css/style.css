@@ -359,7 +359,7 @@ color: var(--color-senior-text);
 }
 
 /* Celular: formulário empilhado, cards em 1 coluna, botões maiores */
-@media (max-width: 640px) {
+@media (max-width: 720px) {
     .wrapper {
         padding: 32px 16px 56px;
     }
