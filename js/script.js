@@ -4,23 +4,37 @@ const nenhumCadastroAviso = document.querySelector('.empty-title');
 const nenhCadastroAvisoSub = document.querySelector('.empty-subtitle');
 const pessoasCadastradas = document.querySelector('.empty-state');
 const nomeDaPessoa = document.querySelector('#name-input');
-const i = document.querySelector('#age-input');
+const i = document.querySelector('#age-input'); 
+const textCadastrados = document.querySelector('h4');
+
+function verificarMensagens() {
+   const pg = document.querySelectorAll('.people-grid');
+   const peopleGrid = pg[1];
+
+   if(peopleGrid.childElementCount != 0) {
+      textCadastrados.classList.remove('desativar');
+      nenhumCadastroAviso.classList.add('desativar');
+      nenhCadastroAvisoSub.classList.add('desativar');
+   } else {
+      textCadastrados.classList.add('desativar');
+      nenhumCadastroAviso.classList.remove('desativar');
+      nenhCadastroAvisoSub.classList.remove('desativar');
+   }
+};
 
 function verificacao() {
+   
    const nomeDaPessoa = document.querySelector('#name-input').value;
    const i = document.querySelector('#age-input').value;
    const idadeDaPessoa = Number(i);
 
-   if(nomeDaPessoa.length != 0 && i.length != 0) {
+   if(nomeDaPessoa.length != 0 && i.length != 0) {      
 
-      nenhumCadastroAviso.classList.add('desativar');
-      nenhCadastroAvisoSub.classList.add('desativar');
-      let textCadastrados = document.createElement('h4');
-      textCadastrados.innerText = 'Cadastrados';
-      pessoasCadastradas.appendChild(textCadastrados);
-
-      if(idadeDaPessoa < 0 && idadeDaPessoa > 126) {
+      if(idadeDaPessoa < 0 || idadeDaPessoa > 126) {
          alert('[ERRO] Digite uma idade válida!');
+         nomeDaPessoa.value = nomeDaPessoa;
+         nomeDaPessoa.focus();
+         i.value = i;
       } else {
          criarCard(nomeDaPessoa, idadeDaPessoa);
       }
@@ -81,79 +95,57 @@ function calcularIdade(idade, tipoDeTexto) {
 };
 
 function verificandoOsCampos(campoNome, campoIdade) {
+   const cardDeCadastro = document.querySelector('.form-card');
    const avisoDosCampos = document.querySelector('.form-message');
+
    if(campoNome.value.length != 0 && campoIdade.value.length != 0) {
       avisoDosCampos.classList.add('desativar');
+      cardDeCadastro.classList.add('espacamento-baixo');
+   } else {
+      avisoDosCampos.classList.remove('desativar');
+      cardDeCadastro.classList.remove('espacamento-baixo');
    }
 };
 
-botaoAdicionarPessoa.addEventListener('click', () => {
-   verificacao();
-   const nomeDaPessoa = document.querySelector('#name-input');
-   const i = document.querySelector('#age-input');
 
+
+botaoAdicionarPessoa.addEventListener('click', () => {
+
+   verificacao();
+   
    nomeDaPessoa.value = '';
    nomeDaPessoa.focus();
    i.value = '';
+
+   verificandoOsCampos(nomeDaPessoa, i);
+
+   removerItemDaLista();
+
+   verificarMensagens();
 });
 
 nomeDaPessoa.addEventListener('input', () => {
-   const nomeDaPessoa = document.querySelector('#name-input');
-   const i = document.querySelector('#age-input');
    verificandoOsCampos(nomeDaPessoa, i);
 });
 
-/*
-    DESAFIO — GERENCIADOR DE CARTÕES
+i.addEventListener('input', () => {
+   verificandoOsCampos(nomeDaPessoa, i)
+});
 
-    Crie um sistema em JavaScript que permita adicionar pessoas
-    através de um formulário contendo nome e idade.
 
-    REQUISITOS:
 
-    1. Ao clicar no botão "Adicionar pessoa", pegue o nome e a idade
-       informados pelo usuário.
+// REMOVER
 
-    2. Não permita adicionar uma pessoa caso algum dos campos esteja vazio.
-       Nesse caso, exiba uma mensagem de aviso.
 
-    3. Crie um cartão para cada pessoa adicionada usando JavaScript.
 
-       O cartão deve apresentar:
-       - Nome
-       - Idade
-       - Classificação da pessoa
+function removerItemDaLista() {
+   const remover = document.querySelectorAll('.btn-secondary');
 
-    4. Classifique a pessoa de acordo com a idade:
-
-       0 a 12 anos  → Criança
-       13 a 17 anos → Adolescente
-       18 a 59 anos → Adulto
-       60 anos ou + → Idoso
-
-    5. Cada cartão deve possuir um botão "Remover".
-
-       Ao clicar nesse botão, somente o cartão correspondente
-       deve ser removido da página.
-
-    6. Todo o conteúdo dos cartões deve ser criado pelo JavaScript.
-       Não deixe os cartões prontos no HTML.
-
-    ------------------------------------------------------------
-
-    ORIENTAÇÃO:
-
-    Faça o desafio por etapas.
-
-    Etapa 1 → Selecionar os elementos necessários do HTML.
-    Etapa 2 → Capturar o nome e a idade.
-    Etapa 3 → Validar os campos.
-    Etapa 4 → Criar o cartão.
-    Etapa 5 → Classificar a pessoa pela idade.
-    Etapa 6 → Criar o botão de remover.
-    Etapa 7 → Fazer o botão remover somente o seu cartão.
-
-    Tente resolver utilizando apenas os recursos de JavaScript
-    que você já conhece. Não é necessário utilizar Math ou
-    outros recursos que ainda não foram estudados.
-*/
+   for(let botoesRemvoer of remover) {
+      botoesRemvoer.addEventListener('click', () => {
+         let card = botoesRemvoer.parentElement;
+         card.remove();
+         verificarMensagens();
+      });
+   };
+}
