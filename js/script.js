@@ -4,14 +4,21 @@ const nenhumCadastroAviso = document.querySelector('.empty-title');
 const nenhCadastroAvisoSub = document.querySelector('.empty-subtitle');
 const pessoasCadastradas = document.querySelector('.empty-state');
 const nomeDaPessoa = document.querySelector('#name-input');
+const cadastrosExemplos = document.querySelector('h2');
 const i = document.querySelector('#age-input'); 
 const textCadastrados = document.querySelector('h4');
 
 function verificarMensagens() {
-   const pg = document.querySelectorAll('.people-grid');
-   const peopleGrid = pg[1];
+   const pg1 = document.querySelectorAll('.people-grid');
+   const peopleGrid1 = pg1[0];
+   if(peopleGrid1.childElementCount === 0) {
+      cadastrosExemplos.classList.add('desativar');
+   }
 
-   if(peopleGrid.childElementCount != 0) {
+   const pg2 = document.querySelectorAll('.people-grid');
+   const peopleGrid2 = pg2[1];
+
+   if(peopleGrid2.childElementCount != 0) {
       textCadastrados.classList.remove('desativar');
       nenhumCadastroAviso.classList.add('desativar');
       nenhCadastroAvisoSub.classList.add('desativar');
@@ -20,6 +27,7 @@ function verificarMensagens() {
       nenhumCadastroAviso.classList.remove('desativar');
       nenhCadastroAvisoSub.classList.remove('desativar');
    }
+
 };
 
 function verificacao() {
@@ -149,3 +157,5 @@ function removerItemDaLista() {
       });
    };
 }
+
+removerItemDaLista();
